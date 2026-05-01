@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MakerWorld Cost</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1 data-i18n="title">MakerWorld Cost</h1>
+      <select id="locale"></select>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2 data-i18n="filamentManager">Filament Manager</h2>
+        <div class="row">
+          <label data-i18n="activeFilament"></label>
+          <select id="selectedFilament"></select>
+        </div>
+        <div id="filamentList"></div>
+        <button id="addFilament" class="ghost" data-i18n="addFilament"></button>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="printerSettings"></h2>
+        <div class="grid two">
+          <label><span data-i18n="printerName"></span><input id="printerName" /></label>
+          <label><span data-i18n="maxRuntime"></span><input id="maxRuntimeHours" type="number" min="1" step="1" /></label>
+          <label><span data-i18n="printerCost"></span><input id="purchaseCost" type="number" min="0" step="0.01" /></label>
+          <label><span data-i18n="printerLifetime"></span><input id="lifetimeHours" type="number" min="1" step="1" /></label>
+          <label><span data-i18n="hourlyRate"></span><input id="hourlyRate" type="number" min="0" step="0.01" /></label>
+          <label class="check"><input id="hourlyRateEnabled" type="checkbox" /><span data-i18n="useHourlyRate"></span></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="energyParts"></h2>
+        <div class="grid two">
+          <label class="check"><input id="energyEnabled" type="checkbox" /><span data-i18n="energyEnabled"></span></label>
+          <label><span data-i18n="watts"></span><input id="watts" type="number" min="0" step="1" /></label>
+          <label><span data-i18n="kwhPrice"></span><input id="kwhPrice" type="number" min="0" step="0.001" /></label>
+        </div>
+        <h3 data-i18n="parts"></h3>
+        <div id="partsList"></div>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="extras"></h2>
+        <div class="grid two">
+          <label><span data-i18n="waste"></span><input id="wastePercent" type="number" min="0" step="1" /></label>
+          <label><span data-i18n="failureRate"></span><input id="failureRatePercent" type="number" min="0" step="1" /></label>
+          <label><span data-i18n="postProcessing"></span><input id="postProcessingCost" type="number" min="0" step="0.01" /></label>
+          <label><span data-i18n="currencySymbol"></span><input id="currencySymbol" /></label>
+          <label>
+            <span data-i18n="currencyPosition"></span>
+            <select id="currencyPosition">
+              <option value="before" data-i18n="before"></option>
+              <option value="after" data-i18n="after"></option>
+            </select>
+          </label>
+        </div>
+      </section>
+      <button id="saveBtn" class="primary" data-i18n="save"></button>
+      <p id="status"></p>
+    </main>
+
+    <template id="filamentTpl">
+      <div class="filament-item">
+        <input data-key="name" placeholder="Name" />
+        <input data-key="material" placeholder="Material" />
+        <input data-key="color" placeholder="Color" />
+        <input data-key="spoolWeightGrams" type="number" min="1" step="1" placeholder="Weight g" />
+        <input data-key="spoolCost" type="number" min="0" step="0.01" placeholder="Cost" />
+        <button data-action="remove">×</button>
+      </div>
+    </template>
+
+    <template id="partTpl">
+      <div class="part-item">
+        <input data-key="name" placeholder="Part" />
+        <input data-key="replacementCost" type="number" min="0" step="0.01" placeholder="Cost" />
+        <input data-key="lifetimeHours" type="number" min="1" step="1" placeholder="Lifetime h" />
+      </div>
+    </template>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
