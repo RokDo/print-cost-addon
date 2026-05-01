@@ -1,18 +1,22 @@
-{ 
+{
   "manifest_version": 3,
   "name": "MakerWorld Print Cost Calculator",
-  "version": "1.0",
-  "description": "A browser extension to calculate print costs.",
+  "version": "2.0.0",
+  "description": "Calculate 3D print cost directly on MakerWorld model pages.",
   "permissions": ["storage"],
+  "host_permissions": ["https://makerworld.com/*", "https://*.makerworld.com/*"],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon.png"
+    "default_title": "MakerWorld Cost"
   },
-  "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "js": ["content-script.js"]
-  }]
+  "content_scripts": [
+    {
+      "matches": ["https://makerworld.com/*", "https://*.makerworld.com/*"],
+      "js": ["content-script.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
 }
